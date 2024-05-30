@@ -1,0 +1,58 @@
+#include <time.h>
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+
+void gameMenu(void) {
+    printf("**************************\n");
+    printf("***1. play     0. exit ***\n");
+    printf("**************************\n");
+}
+
+void game(void) {
+    int randNum = rand() % 100 + 1;
+    int startNum = 1;
+    int endNum = 100;
+    int num = 0;
+    while (1) {
+        printf("范围是%d - %d, 请你猜>", startNum, endNum);
+        scanf("%d", &num);
+        if (num > randNum) {
+            printf("大了\n");
+            endNum = num;
+        } else if (num < randNum) {
+            printf("小了\n");
+            startNum = num;
+        } else {
+            printf("恭喜你中奖了\n");
+            break;
+        }
+    }
+}
+
+void gameStart(void) {
+    int choose;
+    do {
+        gameMenu();
+        printf("请选择>");
+        scanf("%d",&choose);
+        switch (choose) {
+            case 1:
+                printf("开始猜数字\n");
+                game();
+                continue;
+            case 0:
+                printf("退出游戏\n");
+                break;
+            default:
+                printf("输入错误\n");
+                continue;
+        }
+    } while (choose);
+}
+
+int main() {
+    srand((unsigned int)time(NULL));
+    gameStart();
+    return 0;
+}
